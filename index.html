@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akhil Joshua Dennison | FinTech Graduate & Financial Analyst</title>
+    <title>Akhil Joshua Dennison | Finance, Strategy &amp; Notes</title>
+
+    <!-- Warm serif (headings) + clean sans (body) typography, in the spirit of Anthropic's editorial type pairing -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-primary: #f8fafc;
-            --bg-surface: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent-primary: #1e3a8a;
-            --accent-secondary: #0284c7;
-            --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08);
+            /* Warm palette */
+            --bg-primary: #F7F1E7;
+            --bg-surface: #FFFFFF;
+            --bg-surface-alt: #FBF0DF;
+            --text-main: #2B2118;
+            --text-muted: #6E5D4E;
+            --accent-primary: #43301F;   /* dark brown - headings & primary links */
+            --accent-secondary: #6B5643; /* medium brown - secondary links/subtitles */
+            --accent-bright: #EFE6D3;    /* off-white/cream - accents on dark surfaces */
+            --border-color: #E8DDC8;
+            --hero-start: #3A2A1E;
+            --hero-end: #1C130C;
+            --shadow-sm: 0 1px 3px rgba(43,33,24,0.08);
+            --shadow-md: 0 4px 10px -2px rgba(43,33,24,0.12);
+            --shadow-lg: 0 14px 28px -6px rgba(43,33,24,0.20);
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         * {
@@ -25,13 +38,16 @@
             scroll-behavior: smooth;
         }
 
-        /* Uniform Typography Stack */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-sans);
             background-color: var(--bg-primary);
             color: var(--text-main);
             line-height: 1.6;
             font-size: 16px;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-logo, .card-title {
+            font-family: var(--font-serif);
         }
 
         /* Navigation */
@@ -50,7 +66,7 @@
 
         .nav-logo {
             font-weight: 700;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             color: var(--accent-primary);
             text-decoration: none;
             letter-spacing: -0.2px;
@@ -58,14 +74,14 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.4rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.93rem;
             font-weight: 600;
             transition: color 0.2s ease;
         }
@@ -83,6 +99,7 @@
 
         section {
             margin-bottom: 4.5rem;
+            scroll-margin-top: 90px;
         }
 
         h2 {
@@ -102,16 +119,17 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: var(--accent-secondary);
+            background: var(--accent-primary);
             border-radius: 2px;
         }
 
         /* Seamless Merged Hero & About Introduction */
         .intro-section {
-            background: linear-gradient(135deg, var(--accent-primary) 0%, #0f172a 100%);
+            background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-end) 100%);
             color: white;
             padding: 5rem 1.5rem;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid #2A1D14;
+            scroll-margin-top: 0;
         }
 
         .intro-grid {
@@ -131,31 +149,33 @@
             border-radius: 12px;
             box-shadow: var(--shadow-lg);
             border: 2px solid rgba(255, 255, 255, 0.15);
-            background-color: #0f172a;
+            background-color: var(--hero-end);
             display: block;
         }
 
         .intro-content h1 {
             font-size: 2.75rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
             letter-spacing: -0.5px;
             line-height: 1.2;
         }
 
         .intro-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #38bdf8;
+            font-size: 1.3rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--accent-bright);
             margin-bottom: 1.5rem;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .intro-content p {
-            font-size: 1.05rem;
-            color: #e2e8f0;
+            font-family: var(--font-serif);
+            font-size: 1.08rem;
+            color: #EDE3D6;
             margin-bottom: 1.25rem;
-            line-height: 1.7;
+            line-height: 1.75;
         }
 
         .btn-group {
@@ -175,15 +195,18 @@
             font-weight: 600;
             text-decoration: none;
             transition: all 0.2s ease;
+            font-family: var(--font-sans);
+            cursor: pointer;
         }
 
         .btn-primary {
-            background-color: var(--accent-secondary);
+            background-color: var(--accent-primary);
             color: white;
+            border: 1px solid var(--accent-primary);
         }
 
         .btn-primary:hover {
-            background-color: #0369a1;
+            background-color: #2C1F14;
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
@@ -206,30 +229,11 @@
             margin-top: 1.5rem;
         }
 
-        .cert-highlight-dark {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #f8fafc;
-            text-decoration: none;
-            transition: background 0.2s ease;
-        }
-
-        .cert-highlight-dark:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
         .cert-highlight {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            background: #f1f5f9;
+            background: var(--bg-surface-alt);
             padding: 0.6rem 1.2rem;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -238,10 +242,11 @@
             color: var(--accent-primary);
             text-decoration: none;
             transition: background 0.2s ease;
+            font-family: var(--font-sans);
         }
 
         .cert-highlight:hover {
-            background: #e2e8f0;
+            background: #E6DAC0;
         }
 
         /* Experience & Leadership Cards */
@@ -331,7 +336,7 @@
             width: 100%;
             aspect-ratio: 1 / 1;
             object-fit: contain;
-            background: #0f172a;
+            background: var(--hero-end);
             border-radius: 8px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
@@ -342,7 +347,7 @@
             width: 100%;
             max-height: 480px;
             object-fit: contain;
-            background: #0f172a;
+            background: var(--hero-end);
             border-radius: 8px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
@@ -374,6 +379,7 @@
             box-shadow: var(--shadow-lg);
         }
 
+        /* Brand stripe colors kept true to each firm's own identity */
         .cert-jpm { border-top: 5px solid #0f2b48; }
         .cert-mck { border-top: 5px solid #0051a5; }
 
@@ -386,8 +392,8 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        /* Enforced Uniform Sans-Serif Typography */
         .brand-logo-text {
+            font-family: var(--font-sans);
             font-weight: 800;
             font-size: 1.15rem;
             letter-spacing: -0.3px;
@@ -399,7 +405,7 @@
         .cert-date-badge {
             font-size: 0.75rem;
             font-weight: 700;
-            background: #f1f5f9;
+            background: var(--bg-surface-alt);
             color: var(--text-muted);
             padding: 0.25rem 0.6rem;
             border-radius: 12px;
@@ -455,8 +461,8 @@
 
         /* Continuous Learning Feature Box */
         .learning-card {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
+            background: var(--bg-surface-alt);
+            border: 1px solid var(--border-color);
             border-left: 4px solid var(--accent-secondary);
             padding: 1.75rem;
             border-radius: 12px;
@@ -475,7 +481,7 @@
             width: 100%;
             max-height: 400px;
             object-fit: contain;
-            background: #ffffff;
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             margin-top: 1.25rem;
@@ -504,8 +510,8 @@
         }
 
         .gpa-badge {
-            background: #e0f2fe;
-            color: #0369a1;
+            background: var(--bg-surface-alt);
+            color: var(--accent-primary);
             font-weight: 700;
             font-size: 0.95rem;
             padding: 0.5rem 1rem;
@@ -514,7 +520,7 @@
         }
 
         .research-showcase {
-            background: #f8fafc;
+            background: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             padding: 1.5rem;
@@ -534,13 +540,243 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             margin-top: 1rem;
-            background: #cbd5e1;
+            background: #E4D9C8;
+        }
+
+        /* Industry Commentary Section (Formerly Notes) */
+        .notes-intro {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 1.08rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .notes-banner {
+            width: 100%;
+            max-height: 260px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: block;
+        }
+
+        .notes-subheading {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin-bottom: 1.1rem;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .note-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.6rem;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .note-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .note-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-primary);
+            background: var(--bg-surface-alt);
+            padding: 0.25rem 0.65rem;
+            border-radius: 20px;
+            margin-bottom: 0.75rem;
+            width: fit-content;
+        }
+
+        .note-date {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+
+        .note-card h4 {
+            font-size: 1.12rem;
+            margin-bottom: 0.6rem;
+            color: var(--text-main);
+            line-height: 1.35;
+        }
+
+        .note-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 1.1rem;
+            flex-grow: 1;
+        }
+
+        .note-link {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--accent-secondary);
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        .note-link:hover {
+            text-decoration: underline;
+        }
+
+        .recommend-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .recommend-item {
+            display: flex;
+            gap: 1.1rem;
+            align-items: flex-start;
+            background: var(--bg-surface-alt);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.1rem 1.3rem;
+        }
+
+        .recommend-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+            margin-top: 0.15rem;
+        }
+
+        .recommend-type {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.2rem;
+        }
+
+        .recommend-text h5 {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+        }
+
+        .recommend-text p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* -------------------------------------
+           Personal Interests Cards Styles
+        -------------------------------------- */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .interest-card {
+            background: var(--bg-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .interest-card h3 {
+            font-size: 1.25rem;
+            color: var(--accent-primary);
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .interest-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .interest-card strong {
+            color: var(--text-main);
+        }
+
+        /* Static Image Window Styling */
+        .interest-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--hero-end);
+        }
+
+        /* Scrollable Photo Window / Carousel Styling */
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-secondary) var(--bg-primary);
+        }
+
+        .carousel-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .carousel-container::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 4px;
+        }
+        .carousel-container::-webkit-scrollbar-thumb {
+            background: var(--accent-secondary);
+            border-radius: 4px;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            height: 220px;
+            object-fit: cover;
+            scroll-snap-align: start;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--hero-end);
         }
 
         /* Footer */
         footer {
-            background: #0f172a;
-            color: #cbd5e1;
+            background: var(--hero-end);
+            color: #E7DCC9;
             padding: 4rem 1.5rem 2rem 1.5rem;
             font-size: 0.95rem;
         }
@@ -552,11 +788,11 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2.5rem;
             padding-bottom: 2.5rem;
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid #2A1D14;
         }
 
         .footer-col h4 {
-            color: white;
+            color: #FBF3E6;
             margin-bottom: 1rem;
             font-size: 1.1rem;
             font-weight: 700;
@@ -571,7 +807,7 @@
         }
 
         .footer-col a {
-            color: #38bdf8;
+            color: var(--accent-bright);
             text-decoration: none;
         }
 
@@ -583,7 +819,7 @@
             text-align: center;
             padding-top: 2rem;
             font-size: 0.85rem;
-            color: #64748b;
+            color: #A6957F;
         }
 
         @media (max-width: 850px) {
@@ -610,10 +846,12 @@
         <a href="#about" class="nav-logo">Akhil Joshua Dennison</a>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#industry-commentary">Industry Commentary</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#skills">Skills & Practice</a></li>
             <li><a href="#leadership">Leadership</a></li>
             <li><a href="#education">Education</a></li>
+            <li><a href="#personal-interests">Personal Interests</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -627,21 +865,11 @@
             <!-- Introduction & Rewritten About Me -->
             <div class="intro-content">
                 <h1>Akhil Joshua Dennison</h1>
-                <h3>B.Com FinTech Graduate | Financial Analysis, M&A Modeling & Automation</h3>
+                <h3>I like figuring out what a business is really worth &mdash; and arguing about what it should do next.</h3>
                 
-                <p>I am a Bachelor of Commerce (Financial Technology) senior majoring in Finance at Vellore Institute of Technology (Class of 2026), combining a rigorous financial theory foundation with practical skills in Python data automation and valuation.</p>
+                <p>I'm a B.Com (Financial Technology) graduate from Vellore Institute of Technology, where I majored in Finance. Somewhere between spreadsheets and case competitions, I discovered that what I actually enjoy is sitting with a company's numbers until they start telling a coherent story &mdash; and then making the case for what that story means.</p>
                 
-                <p>As a fast and eager learner, I quickly absorb complex financial concepts, specialized software stacks, and analytical frameworks to solve challenging real-world problems. Driven to create measurable impact, I thrive in fast-paced transaction and deal facilitation environments where adaptability and precision are essential.</p>
-
-                <!-- Recognition Badges -->
-                <div class="badge-group">
-                    <a href="Akhil_VIT_Spl_Achiever_certificate.pdf" target="_blank" class="cert-highlight-dark">
-                        🏆 VIT Special Achiever Award (2025-26)
-                    </a>
-                    <a href="ideathon_certificate.jpg" target="_blank" class="cert-highlight-dark">
-                        🥇 E-Summit '24 Ideathon Winner
-                    </a>
-                </div>
+                <p>Outside of that, I'm the person who'll happily debate you about almost anything &mdash; I did it competitively at university, and honestly never really stopped. I read and write more than I let on, play tennis with more enthusiasm than skill, and have a long-running fascination with cars and how they're engineered. I take my coffee seriously enough to have opinions about it, and I know just enough Python to automate the boring parts of a spreadsheet &mdash; nowhere near enough to call myself a programmer.</p>
 
                 <!-- Connect Options -->
                 <div class="btn-group">
@@ -653,12 +881,76 @@
     </header>
 
     <main class="container">
-        <!-- 2. Work Experience (Reordered: Zapare above Algabay) -->
+        <!-- 2. Industry Commentary Section (Moved up here) -->
+        <section id="industry-commentary">
+            <h2>Industry Commentary</h2>
+            <p class="notes-intro">A running, occasionally-updated corner for the opinions and recommendations that don't fit neatly into a resume &mdash; some about deals and markets, some just about what I've been reading, watching, or arguing about lately.</p>
+
+            <!-- PLACEHOLDER IMAGE — replace the src below with your own photo (e.g. your desk, a bookshelf, or a coffee shot) -->
+            <img src="https://placehold.co/1200x400/F0E6D3/43301F?text=REPLACE+THIS+IMAGE" alt="Placeholder banner image — replace with your own photo" class="notes-banner">
+
+            <h3 class="notes-subheading">Recent Writing</h3>
+            <!-- PLACEHOLDER POSTS — swap the tags, dates, titles, excerpts, and href="#" links below for your real posts -->
+            <div class="notes-grid">
+                <div class="note-card">
+                    <span class="note-tag">Opinion</span>
+                    <span class="note-date">June 2026</span>
+                    <h4>What Actually Makes a Merchant Switch Payment Apps</h4>
+                    <p>A few honest reflections on the UPI research I co-authored, and why "switching costs" in fintech are more behavioural than anyone likes to admit.</p>
+                    <a href="#" class="note-link">Read the piece &rarr;</a>
+                </div>
+                <div class="note-card">
+                    <span class="note-tag">Reflection</span>
+                    <span class="note-date">May 2026</span>
+                    <h4>What Competitive Debate Teaches You About Reading a Deal</h4>
+                    <p>Three years of tournament debating turned out to be surprisingly good training for sitting across a term sheet. Here's why.</p>
+                    <a href="#" class="note-link">Read the piece &rarr;</a>
+                </div>
+                <div class="note-card">
+                    <span class="note-tag">Notes</span>
+                    <span class="note-date">April 2026</span>
+                    <h4>Building My First DCF by Hand Before Touching a Template</h4>
+                    <p>Why I still think doing the unglamorous version first makes the shortcut version make more sense later.</p>
+                    <a href="#" class="note-link">Read the piece &rarr;</a>
+                </div>
+            </div>
+
+            <h3 class="notes-subheading">Currently Recommending</h3>
+            <!-- PLACEHOLDER RECOMMENDATIONS — swap these for whatever you're actually reading/watching/listening to -->
+            <div class="recommend-list">
+                <div class="recommend-item">
+                    <span class="recommend-icon">📘</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Book</span>
+                        <h5>The Outsiders &mdash; William Thorndike</h5>
+                        <p>A different lens on capital allocation. The case studies made me rethink a few "best practices" I'd taken for granted.</p>
+                    </div>
+                </div>
+                <div class="recommend-item">
+                    <span class="recommend-icon">📰</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Recently Fav Newsletter Read</span>
+                        <h5>Money Stuff &mdash; Matt Levine</h5>
+                        <p>The only finance newsletter that makes me laugh out loud on a Tuesday morning while still teaching me something real.</p>
+                    </div>
+                </div>
+                <div class="recommend-item">
+                    <span class="recommend-icon">🏎️</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Documentary</span>
+                        <h5>Senna</h5>
+                        <p>Less about racing than about obsession, and what it costs. I've rewatched it more times than I'd like to admit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Work Experience -->
         <section id="experience">
             <h2>Work Experience</h2>
             <div class="timeline">
                 
-                <!-- Zapare Technologies (Moved Above) -->
+                <!-- Zapare Technologies -->
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Zapare Technologies Pvt Ltd</div>
@@ -677,7 +969,7 @@
                     </div>
                 </div>
 
-                <!-- Algabay AI (Moved Below) -->
+                <!-- Algabay AI -->
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Algabay AI</div>
@@ -695,7 +987,7 @@
             </div>
         </section>
 
-        <!-- 3. Technical Skills, Certifications & Practice -->
+        <!-- 4. Technical Skills, Certifications & Practice -->
         <section id="skills">
             <h2>Technical Skills & Certifications</h2>
             
@@ -773,7 +1065,7 @@
                 <div class="skill-box">
                     <div>
                         <h4>Programming & Data</h4>
-                        <p>Competent in Python and SQL. Coursework in R and Python for Finance, as well as AI and ML for Finance.</p>
+                        <p>Comfortable with SQL for data work. Still building fluency in Python &mdash; mostly through coursework in R and Python for Finance, plus AI and ML for Finance &mdash; and honest about being a work in progress there.</p>
                     </div>
                 </div>
 
@@ -786,7 +1078,7 @@
             </div>
         </section>
 
-        <!-- 4. Leadership & Community Impact -->
+        <!-- 5. Leadership & Community Impact -->
         <section id="leadership">
             <h2>Leadership & Community Impact</h2>
             <div class="timeline">
@@ -824,7 +1116,7 @@
             </div>
         </section>
 
-        <!-- 5. Education & Academic Background -->
+        <!-- 6. Education & Academic Background -->
         <section id="education">
             <h2>Education & Academic Background</h2>
             <div class="edu-card">
@@ -832,7 +1124,7 @@
                     <div>
                         <h3 style="font-size: 1.3rem; font-weight:700; color:var(--text-main);">Vellore Institute of Technology</h3>
                         <p style="color:var(--accent-secondary); font-weight:600; margin-top:0.2rem;">Bachelor of Commerce (Financial Technology) | Finance Major</p>
-                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.2rem;">Class of 2026 &bull; Vellore, TN</p>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.2rem;">Graduated 2026 &bull; Vellore, TN</p>
                     </div>
                     <div class="gpa-badge">
                         GPA: 8.06 / 10.00 (3.3/4.0)
@@ -840,6 +1132,19 @@
                 </div>
                 <hr style="border:none; border-top:1px solid var(--border-color); margin:1.25rem 0;">
                 <p style="color:var(--text-muted); font-size:0.95rem;"><strong>Key Coursework:</strong> Financial Management, Financial Markets, Accounting, Financial Modelling, Audit & Assurance, Business Research Methods.</p>
+
+                <!-- Honors & Awards (moved here from the hero introduction) -->
+                <div style="margin-top:1.5rem;">
+                    <p style="color:var(--text-muted); font-size:0.9rem; font-weight:700; margin-bottom:0.7rem;">Honors & Awards</p>
+                    <div class="badge-group" style="margin-top:0;">
+                        <a href="Akhil_VIT_Spl_Achiever_certificate.pdf" target="_blank" class="cert-highlight">
+                            🏆 VIT Special Achiever Award (2025-26)
+                        </a>
+                        <a href="ideathon_certificate.jpg" target="_blank" class="cert-highlight">
+                            🥇 E-Summit '24 Ideathon Winner (E-Cell)
+                        </a>
+                    </div>
+                </div>
                 
                 <!-- Integrated Research Work Presentation Window -->
                 <div class="research-showcase">
@@ -858,9 +1163,55 @@
                 </div>
             </div>
         </section>
+
+        <!-- 7. Personal Interests (Newly Added Section) -->
+        <section id="personal-interests">
+            <h2>Personal Interests</h2>
+            <div class="interests-grid">
+                
+                <!-- Debate Card with Carousel -->
+                <div class="interest-card">
+                    <h3>Competitive Debate</h3>
+                    <div class="carousel-container">
+                        <!-- Add your debate photos here. Users can horizontally scroll through this container -->
+                        <img src="https://placehold.co/600x400/3A2A1E/FBF0DF?text=Debate+Photo+1" alt="Debate Photo 1" class="carousel-item">
+                        <img src="https://placehold.co/600x400/43301F/FBF0DF?text=Debate+Photo+2" alt="Debate Photo 2" class="carousel-item">
+                        <img src="https://placehold.co/600x400/6B5643/FBF0DF?text=Debate+Photo+3" alt="Debate Photo 3" class="carousel-item">
+                    </div>
+                    <p>My ongoing journey in competitive university debate, specializing in formats like WUDC, UADC (Asian Parliamentary), ABP, and Australs.</p>
+                </div>
+
+                <!-- Books & Reading Card -->
+                <div class="interest-card">
+                    <h3>Books & Reading</h3>
+                    <img src="https://placehold.co/600x400/3A2A1E/FBF0DF?text=Current+Book+Rec" alt="Current Book Recommendation" class="interest-img">
+                    <p><strong>Current Recommendation:</strong> Add your book title here.</p>
+                    <p>A dedicated space for what I am currently reading and recommending.</p>
+                    <a href="https://www.goodreads.com/" target="_blank" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">My Goodreads Profile</a>
+                </div>
+
+                <!-- Cars Card -->
+                <div class="interest-card">
+                    <h3>Automotive Heritage</h3>
+                    <img src="https://placehold.co/600x400/3A2A1E/FBF0DF?text=Favourite+Car" alt="Favourite Car" class="interest-img">
+                    <p><strong>Porsche 911 (993)</strong></p>
+                    <p>Fascinated by automotive engineering and history. Exploring the legacy of iconic machines and their mechanical evolution over the decades.</p>
+                </div>
+
+                <!-- Coffee Card -->
+                <div class="interest-card">
+                    <h3>Coffee & Brewing</h3>
+                    <img src="https://placehold.co/600x400/3A2A1E/FBF0DF?text=Favourite+Coffee+Roast" alt="Favourite Coffee" class="interest-img">
+                    <p><strong>Ethiopian Yirgacheffe - Light Roast</strong></p>
+                    <p>Taking my coffee seriously. A collection of my favourite beans, origins, and brewing techniques.</p>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
-    <!-- 6. Contact & Footer Section -->
+    <!-- 8. Contact & Footer Section -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-col">
@@ -877,8 +1228,11 @@
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Personal Interests</h4>
-                <p style="color:#94a3b8;">Tennis, Formula 1, Reading</p>
+                <!-- Personal Interests moved to main section, keeping this brief link structure for design balance -->
+                <h4>More About Me</h4>
+                <ul>
+                    <li><a href="#personal-interests">View Personal Interests</a></li>
+                </ul>
             </div>
         </div>
         <div class="copyright">
