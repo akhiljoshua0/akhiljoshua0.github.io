@@ -782,6 +782,51 @@
             .edu-grid { grid-template-columns: 1fr; }
             .ppt-preview-window { height: 320px; }
         }
+        /* ==========================================================
+           SILKY SMOOTH ANIMATIONS & ENHANCEMENTS 
+           ========================================================== */
+
+        /* 1. Base Fade-In Class */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        /* Triggered via JavaScript when in view */
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 2. Staggered Delays for Grid Layouts */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* 3. Dynamic Sticky Navbar */
+        nav {
+            transition: box-shadow 0.4s ease, padding 0.4s ease, background 0.4s ease;
+        }
+        
+        nav.scrolled {
+            box-shadow: var(--shadow-md);
+            padding: 0.7rem 5%;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        /* 4. Upgraded Card Hover Dynamics (Overrides existing basic hovers) */
+        .card, .cert-card-featured, .skill-box, .interest-card, .note-card, .edu-card {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .card:hover, .cert-card-featured:hover, .skill-box:hover, .interest-card:hover, .note-card:hover, .edu-card:hover {
+            transform: translateY(-6px) !important;
+            box-shadow: var(--shadow-lg) !important;
+        }
     </style>
 </head>
 <body>
@@ -1194,6 +1239,70 @@
             &copy; 2026 Akhil Joshua Dennison. All rights reserved.
         </div>
     </footer>
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Dynamic Navbar Shadow on Scroll
+            const nav = document.querySelector('nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
 
+            // 2. Setup Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+
+            const scrollObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Ensures it only animates once
+                    }
+                });
+            }, observerOptions);
+
+            // 3. Apply fade-in classes to sections and headers dynamically
+            const sections = document.querySelectorAll('section');
+            const sectionHeaders = document.querySelectorAll('section h2');
+            
+            sectionHeaders.forEach(header => {
+                header.classList.add('fade-in');
+                scrollObserver.observe(header);
+            });
+
+            // 4. Apply staggered fade-ins to all cards/boxes
+            const cards = document.querySelectorAll('.card, .cert-card-featured, .skill-box, .interest-card, .note-card, .learning-card, .edu-card');
+            
+            cards.forEach((card, index) => {
+                card.classList.add('fade-in');
+                
+                // Create a staggered waterfall effect for items in grids
+                if (index % 3 === 1) card.classList.add('delay-1');
+                if (index % 3 === 2) card.classList.add('delay-2');
+                
+                scrollObserver.observe(card);
+            });
+            
+            // 5. Animate Hero Section immediately on page load
+            const introContent = document.querySelector('.intro-content');
+            const profileImg = document.querySelector('.profile-img');
+            
+            if(introContent) {
+                introContent.classList.add('fade-in');
+                setTimeout(() => introContent.classList.add('visible'), 150);
+            }
+            if(profileImg) {
+                profileImg.classList.add('fade-in');
+                setTimeout(() => profileImg.classList.add('visible'), 300);
+            }
+        });
+    </script>
 </body>
 </html>
