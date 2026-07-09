@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akhil Joshua Dennison | Finance, Strategy &amp; Notes</title>
+
+    <!-- Warm serif (headings) + clean sans (body) typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Warm palette */
+            --bg-primary: #F7F1E7;
+            --bg-surface: #FFFFFF;
+            --bg-surface-alt: #FBF0DF;
+            --text-main: #2B2118;
+            --text-muted: #6E5D4E;
+            --accent-primary: #43301F;
+            --accent-secondary: #6B5643;
+            --accent-bright: #EFE6D3;
+            --border-color: #E8DDC8;
+            --hero-start: #3A2A1E;
+            --hero-end: #1C130C;
+            --shadow-sm: 0 1px 3px rgba(43,33,24,0.08);
+            --shadow-md: 0 4px 10px -2px rgba(43,33,24,0.12);
+            --shadow-lg: 0 14px 28px -6px rgba(43,33,24,0.20);
+            --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --nav-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Native smooth scrolling */
+            scroll-behavior: smooth;
+        }
+
+        /* -----------------------------------
+           CUSTOM SCROLLBAR
+        ------------------------------------ */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-secondary);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        h1, h2, h3, h4, h5, h6, .nav-logo, .card-title {
+            font-family: var(--font-serif);
+        }
+
+        /* -----------------------------------
+           RETRACTABLE LEFT NAVIGATION
+        ------------------------------------ */
+        
+        /* Floating Menu Button */
+        .menu-toggle {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            z-index: 2000;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 54px;
+            height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            /* Hardware acceleration & app-like spring */
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+
+        .menu-toggle:hover {
+            transform: scale(1.08) translate3d(0, 0, 0);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Hamburger Icon Animation */
+        .hamburger {
+            width: 22px;
+            height: 2px;
+            background: var(--accent-primary);
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hamburger::before, .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 22px;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            left: 0;
+            will-change: transform;
+        }
+
+        .hamburger::before { transform: translate3d(0, -7px, 0); }
+        .hamburger::after { transform: translate3d(0, 7px, 0); }
+
+        .menu-toggle.active .hamburger { background: transparent; }
+        .menu-toggle.active .hamburger::before { transform: rotate(45deg) translate3d(0, 0, 0); }
+        .menu-toggle.active .hamburger::after { transform: rotate(-45deg) translate3d(0, 0, 0); }
+
+        /* Side Drawer Styling */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: var(--nav-width);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-right: 1px solid var(--border-color);
+            z-index: 1500;
+            padding: 100px 2.5rem 3rem 2.5rem;
+            transform: translate3d(-100%, 0, 0);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-lg);
+            overflow-y: auto;
+            will-change: transform;
+        }
+
+        nav.open {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--accent-primary);
+            text-decoration: none;
+            letter-spacing: -0.2px;
+            margin-bottom: 2.5rem;
+            display: block;
+            line-height: 1.3;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            position: relative;
+            will-change: transform, color;
+        }
+
+        /* ScrollSpy Active State & Hover */
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translate3d(0, -50%, 0) scale(0);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-primary);
+            transform: translate3d(10px, 0, 0);
+        }
+
+        .nav-links a.active::before {
+            transform: translate3d(0, -50%, 0) scale(1);
+        }
+
+        /* Background Overlay when Nav is Open */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(43, 33, 24, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+            will-change: opacity;
+        }
+
+        .nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* -----------------------------------
+           LAYOUT & COMPONENT STYLES
+        ------------------------------------ */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+            scroll-margin-top: 60px;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* Seamless Merged Hero & About Introduction */
+        .intro-section {
+            background: linear-gradient(135deg, var(--hero-start) 0%, var(--hero-end) 100%);
+            color: white;
+            padding: 7rem 1.5rem 5rem 1.5rem;
+            border-bottom: 1px solid #2A1D14;
+            scroll-margin-top: 0;
+        }
+
+        .intro-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            background-color: var(--hero-end);
+            display: block;
+        }
+
+        .intro-content h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .intro-content h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--accent-bright);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .intro-content p {
+            font-family: var(--font-serif);
+            font-size: 1.08rem;
+            color: #EDE3D6;
+            margin-bottom: 1.25rem;
+            line-height: 1.75;
+        }
+
+        .btn-group, .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.75rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            font-family: var(--font-sans);
+            cursor: pointer;
+            /* Smooth spring mechanics for buttons */
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.2s ease;
+            will-change: transform;
+        }
+
+        .btn-primary { background-color: var(--accent-primary); color: white; border: 1px solid var(--accent-primary); }
+        .btn-outline { background-color: transparent; color: white; border: 1px solid rgba(255,255,255,0.35); }
+        
+        .btn-primary:hover { background-color: #2C1F14; transform: translate3d(0, -3px, 0); box-shadow: var(--shadow-md); }
+        .btn-outline:hover { background-color: rgba(255,255,255,0.1); transform: translate3d(0, -3px, 0); }
+
+        .cert-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-surface-alt);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: background 0.2s ease;
+            font-family: var(--font-sans);
+        }
+        .cert-highlight:hover { background: #E6DAC0; }
+
+        /* -----------------------------------
+           GPU ACCELERATED CARD PHYSICS
+        ------------------------------------ */
+        .card, .skill-box, .learning-card, .edu-card, .note-card, .interest-card, .cert-card-featured {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            /* This targets transforms specifically for high VRR buttery smoothness */
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, box-shadow;
+        }
+
+        /* 3D Translation prevents pixel snapping jitter */
+        .card:hover, .skill-box:hover, .learning-card:hover, .edu-card:hover, .note-card:hover, .interest-card:hover, .cert-card-featured:hover {
+            transform: translate3d(0, -8px, 0) scale(1.01);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Specific Component Tweaks */
+        .card { padding: 2rem; margin-bottom: 2rem; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; margin-bottom: 0.5rem; gap: 0.5rem; }
+        .card-title { font-size: 1.25rem; font-weight: 700; color: var(--text-main); }
+        .card-subtitle { font-size: 1rem; font-weight: 600; color: var(--accent-secondary); margin-bottom: 1rem; }
+        .card-meta { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); background: var(--bg-primary); padding: 0.35rem 0.85rem; border-radius: 20px; border: 1px solid var(--border-color); white-space: nowrap; }
+        
+        .bullet-list { list-style-type: none; }
+        .bullet-list li { position: relative; padding-left: 1.5rem; margin-bottom: 0.75rem; color: var(--text-muted); font-size: 0.98rem; }
+        .bullet-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-secondary); font-weight: bold; }
+
+        /* Grids */
+        .featured-certs-grid, .skills-grid, .notes-grid, .interests-grid, .gallery-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .featured-certs-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+        .skills-grid, .notes-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .interests-grid { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2rem; }
+        .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
+
+        .cert-card-featured { padding: 1.75rem; display: flex; flex-direction: column; justify-content: space-between; }
+        .cert-jpm { border-top: 5px solid #0f2b48; }
+        .cert-mck { border-top: 5px solid #0051a5; }
+        .brand-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); }
+        .brand-logo-text { font-family: var(--font-sans); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.3px; }
+        .logo-jpm { color: #0f2b48; } .logo-mck { color: #0051a5; }
+        .cert-date-badge { font-size: 0.75rem; font-weight: 700; background: var(--bg-surface-alt); color: var(--text-muted); padding: 0.25rem 0.6rem; border-radius: 12px; }
+        .cert-link, .note-link { font-size: 0.88rem; font-weight: 700; color: var(--accent-secondary); text-decoration: none; margin-top: auto; padding-top: 0.5rem; }
+        .cert-link:hover, .note-link:hover { text-decoration: underline; }
+
+        .skill-box { padding: 1.5rem; display: flex; flex-direction: column; }
+        .skill-box h4, .note-card h4 { font-size: 1.1rem; font-weight: 700; color: var(--accent-primary); margin-bottom: 0.75rem; }
+        .skill-box h4 { border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+        .skill-box p, .note-card p, .interest-card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+
+        .learning-card { padding: 1.75rem; border-left: 4px solid var(--accent-secondary); background: var(--bg-surface-alt); }
+        .learning-card h4 { color: var(--accent-primary); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .learning-img, .square-window, .fit-window, .interest-img { width: 100%; object-fit: contain; background: var(--hero-end); border-radius: 8px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+        .learning-img { max-height: 400px; padding: 0.5rem; margin-top: 1.25rem; }
+        .square-window { aspect-ratio: 1/1; padding: 0.5rem; }
+        .interest-img { height: 220px; margin-bottom: 1rem; }
+
+        .edu-card { padding: 2rem; border-left: 4px solid var(--accent-primary); }
+        .edu-grid { display: grid; grid-template-columns: 1fr auto; gap: 1rem; margin-bottom: 1rem; }
+        .gpa-badge { background: var(--bg-surface-alt); color: var(--accent-primary); font-weight: 700; font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: 8px; height: fit-content; }
+        
+        .research-showcase { background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.5rem; margin-top: 1.5rem; }
+        .ppt-preview-window { width: 100%; height: 480px; border: 1px solid var(--border-color); border-radius: 8px; margin-top: 1rem; background: #E4D9C8; }
+
+        .note-card { padding: 1.6rem; display: flex; flex-direction: column; }
+        .interest-card { padding: 1.5rem; display: flex; flex-direction: column; }
+        .interest-card h3 { font-size: 1.25rem; color: var(--accent-primary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+
+        .recommend-list { display: flex; flex-direction: column; gap: 1rem; }
+        .recommend-item { display: flex; gap: 1.1rem; align-items: flex-start; background: var(--bg-surface-alt); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.1rem 1.3rem; }
+        .recommend-icon { font-size: 1.6rem; line-height: 1; margin-top: 0.15rem; }
+        .recommend-type { display: block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--accent-primary); letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+        .recommend-text h5 { font-size: 1rem; color: var(--text-main); margin-bottom: 0.25rem; }
+        .recommend-text p { font-size: 0.9rem; color: var(--text-muted); }
+
+        footer { background: var(--hero-end); color: #E7DCC9; padding: 4rem 1.5rem 2rem 1.5rem; font-size: 0.95rem; }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid #2A1D14; }
+        .footer-col h4 { color: #FBF3E6; margin-bottom: 1rem; font-size: 1.1rem; font-weight: 700; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.5rem; }
+        .footer-col a { color: var(--accent-bright); text-decoration: none; }
+        .footer-col a:hover { text-decoration: underline; }
+        .copyright { text-align: center; padding-top: 2rem; font-size: 0.85rem; color: #A6957F; }
+
+        /* -----------------------------------
+           SILKY SCROLL ANIMATION CLASSES
+        ------------------------------------ */
+        .fade-in {
+            opacity: 0;
+            transform: translate3d(0, 40px, 0); /* 3D transform forces GPU compositing */
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+
+        .delay-1 { transition-delay: 0.15s; }
+        .delay-2 { transition-delay: 0.3s; }
+
+        @media (max-width: 850px) {
+            .intro-grid { grid-template-columns: 1fr; text-align: center; }
+            .profile-img { max-width: 280px; margin: 0 auto; }
+            .intro-content h1 { font-size: 2.2rem; }
+            .intro-content h3 { font-size: 1.1rem; }
+            .btn-group, .badge-group { justify-content: center; }
+            .edu-grid { grid-template-columns: 1fr; }
+            .ppt-preview-window { height: 320px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Toggle Button -->
+    <div class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+        <div class="hamburger"></div>
+    </div>
+
+    <!-- Background Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Retractable Sidebar Nav -->
+    <nav id="sideNav">
+        <a href="#about" class="nav-logo">Akhil Joshua<br>Dennison</a>
+        <ul class="nav-links">
+            <li><a href="#about" class="active">About</a></li>
+            <li><a href="#industry-commentary">Industry Commentary</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills & Practice</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#personal-interests">Personal Interests</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Application Canvas -->
+    <header class="intro-section" id="about">
+        <div class="intro-grid">
+            <img src="cupd_speak.jpg" alt="Akhil Joshua Dennison Speaking at CUPD 2026" class="profile-img">
+            <div class="intro-content">
+                <h1>Akhil Joshua Dennison</h1>
+                <h3>I like figuring out what a business is really worth &mdash; and arguing about what it should do next.</h3>
+                <p>I'm a B.Com (Financial Technology) graduate from Vellore Institute of Technology, where I majored in Finance. Somewhere between spreadsheets and case competitions, I discovered that what I actually enjoy is sitting with a company's numbers until they start telling a coherent story - and then making the case for what that story means in a succint action plan.</p>
+                <p>Outside of that, I'm the person who'll happily debate you about almost anything &mdash; I did it competitively at university, and honestly never really stopped. I read and write about any topic under the sun, play tennis with more enthusiasm than skill, and have a long-running fascination with cars and how they're engineered. I take my coffee seriously enough to have opinions about it.As my favourite author JRR Tolkien said "Still round the corner there may wait; A new road or a secret gate..."; I try to keep myself open to opportunities and I welcome challenges with the same spirit.</p>
+                <div class="btn-group">
+                    <a href="http://www.linkedin.com/in/akhiljoshua" target="_blank" class="btn btn-primary">Connect on LinkedIn</a>
+                    <a href="mailto:akhiljoshuad@outlook.com" class="btn btn-outline">Email Contact</a>
+                    <a href="https://substack.com/@akhiljoshua" class="btn btn-outline">Visit My Substack</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="industry-commentary">
+            <h2>Industry Commentary</h2>
+            <p class="notes-intro">A running, occasionally-updated corner for industry relevant chatter and what I've been reading, watching, or arguing about lately. <br><br> <a href="#" style="color: var(--accent-primary); font-weight: bold; text-decoration: none;">Check out my Substack for all the chatter &rarr;</a></p>
+
+            <h3 class="notes-subheading">Recent Writing</h3>
+            <div class="notes-grid">
+                <div class="note-card">
+                    <h4>What Actually Makes a Merchant Switch Payment Apps</h4>
+                    <p>A few honest reflections on the UPI research I co-authored, and why "switching costs" in fintech are more behavioural than anyone likes to admit.</p>
+                    <a href="https://substack.com/@akhiljoshua" class="note-link">Continue reading &rarr;</a>
+                </div>
+                <div class="note-card">
+                    <h4>What Competitive Debate Teaches You About Reading a Deal</h4>
+                    <p>Three years of tournament debating turned out to be surprisingly good training for sitting across a term sheet. Here's why.</p>
+                    <a href="https://substack.com/@akhiljoshua" class="note-link">Continue reading &rarr;</a>
+                </div>
+                <div class="note-card">
+                    <h4>Building My First DCF by Hand Before Touching a Template</h4>
+                    <p>Why I still think doing the unglamorous version first makes the shortcut version make more sense later.</p>
+                    <a href="https://substack.com/@akhiljoshua" class="note-link">Continue reading &rarr;</a>
+                </div>
+            </div>
+
+            <h3 class="notes-subheading">Currently Recommending</h3>
+            <div class="recommend-list">
+                <div class="recommend-item fade-in">
+                    <span class="recommend-icon">📘</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Book</span>
+                        <h5>The Infinity Machine - Sebastian Mallaby</h5>
+                        <p>AI has been brewing since 2015 - This book shows how DeepMind (the engine behind Gemini) drove frontier AI to what it is today by giving us a peek into the mind of its founder - Demis Hassabis</p>
+                        <a href="https://www.goodreads.com/review/show/8739137442" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); padding: 0.4rem 1rem; font-size: 0.85rem; margin-top: 0.8rem;">Learn more</a>
+                    </div>
+                </div>
+                <div class="recommend-item fade-in delay-1">
+                    <span class="recommend-icon">📰</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Recently Fav Newsletter Read</span>
+                        <h5>Money Stuff &mdash; Matt Levine</h5>
+                        <p>The only finance newsletter that makes me laugh out loud on a Tuesday morning while still teaching me something real.</p>
+                        <a href="https://www.bloomberg.com/account/newsletters/money-stuff" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); padding: 0.4rem 1rem; font-size: 0.85rem; margin-top: 0.8rem;">Learn more</a>
+                    </div>
+                </div>
+                <div class="recommend-item fade-in delay-2">
+                    <span class="recommend-icon">🎥</span>
+                    <div class="recommend-text">
+                        <span class="recommend-type">Watching</span>
+                        <h5>Jeremy Grantham's interview with The Diary of a Ceo</h5>
+                        <p>Insights into the global economy and a realistic view on the "AI Bubbl"</p>
+                        <a href="https://youtu.be/32u5T6lO8qk?si=_RdRbVxVh1Z8FDYD" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); padding: 0.4rem 1rem; font-size: 0.85rem; margin-top: 0.8rem;">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Work Experience</h2>
+            <div class="timeline">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Zapare Technologies Pvt Ltd</div>
+                        <span class="card-meta">May 2025 – Jun 2025 | Thrissur, KL</span>
+                    </div>
+                    <div class="card-subtitle">Software Development Intern</div>
+                    <ul class="bullet-list">
+                        <li>Delivered an object detection and extraction model (YOLO and PaddleOCR stack) with ~80% confidence and 0 false positives across 3 client deployments, processing ~2000 files/hour compared to the legacy average of 250-300 files/hour.</li>
+                        <li>Developed a go/no-go executive decision matrix by benchmarking automation accuracy and speed against legacy extraction methods across 8,000+ medical claim file batches for 5+ clients.</li>
+                        <li>Automated monthly and annual performance-based awards using a single-window system (MS Excel, Pandas, NumPy) with customizable metrics and weights for the Sr. Ops Manager, reducing review time by 90%.</li>
+                    </ul>
+                    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
+                        <a href="Zapare_Internship_Certificate.pdf" target="_blank" class="cert-highlight" style="font-size: 0.85rem;">
+                            🏅 Verified Internship Certificate (Zapare Technologies)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Algabay AI</div>
+                        <span class="card-meta">Aug 2023 – Nov 2024 | Vellore, TN</span>
+                    </div>
+                    <div class="card-subtitle">Finance & Human Resources Management</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:1rem; font-style:italic;">MeitY DST Nidhi Prayas funded, VIT-TBI incubated startup</p>
+                    <ul class="bullet-list">
+                        <li>Co-authored a pitch deck with the CFO, structuring a business case built with market research (TAM/SAM/SOM) that was successfully pitched to the incubator (MeitY-TBI) for ₹680,000.</li>
+                        <li>Managed ₹200,000 transaction value with 0 missed or error payments.</li>
+                        <li>Successfully onboarded 11 employees across developer, design, and marketing roles across 2 recruitment drives.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills & Certifications</h2>
+            
+            <div class="featured-certs-grid">
+                <div class="cert-card-featured cert-jpm">
+                    <div>
+                        <div class="brand-header">
+                            <span class="brand-logo-text logo-jpm">J.P. Morgan</span>
+                            <span class="cert-date-badge">May 2026</span>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight:700; color: var(--text-main); margin-bottom: 0.5rem;">Investment Banking Job Simulation</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">Completed practical investment banking simulation tasks via Forage covering M&A target screening, auction process evaluation, comprehensive financial analysis, and structuring executive investment recommendations.</p>
+                    </div>
+                    <a href="JPMC_Forage_Certificate.pdf" target="_blank" class="cert-link">View J.P. Morgan Certificate &rarr;</a>
+                </div>
+
+                <div class="cert-card-featured cert-mck">
+                    <div>
+                        <div class="brand-header">
+                            <span class="brand-logo-text logo-mck">McKinsey &amp; Company</span>
+                            <span class="cert-date-badge">Jun 2026</span>
+                        </div>
+                        <h4 style="font-size: 1.15rem; font-weight:700; color: var(--text-main); margin-bottom: 0.5rem;">Forward Online Learning Program</h4>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1.5rem;">Mastered practical frameworks for structured problem-solving applying core McKinsey methodologies. Developed skills as an effective communicator while building resilience, adaptability, and a solid foundational digital toolkit.</p>
+                    </div>
+                    <a href="McKinsey_Forward_Certificate.pdf" target="_blank" class="cert-link">View McKinsey Certificate &rarr;</a>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <div>
+                        <h4>NSE Academy (NCFM)</h4>
+                        <p>Financial Markets: A Beginners' Module certification demonstrating comprehensive foundational knowledge of financial systems (Score: 83.0%).</p>
+                    </div>
+                    <a href="ncfm.pdf" target="_blank" class="cert-link">View Certificate &rarr;</a>
+                </div>
+                <div class="skill-box">
+                    <div>
+                        <h4>NAL Academy Workshop</h4>
+                        <p>Intensive technical workshop covering Blockchain-Based Digital Payment Systems architecture implemented via Ethereum.</p>
+                    </div>
+                    <a href="NSE_Blockchain_certificate.pdf" target="_blank" class="cert-link">View Certificate &rarr;</a>
+                </div>
+            </div>
+
+            <div class="learning-card">
+                <h4>📈 Continuous Learning & Advanced Practice</h4>
+                <p style="font-size: 0.98rem; color: var(--text-main); font-weight: 700;">Wall Street Prep Certification in Financial & Valuation Modeling</p>
+                <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 0.4rem;">Advancing university curriculum foundations by completing intensive, practical training utilized across global investment banks. Currently building robust, real-world valuation frameworks across <strong>Financial Statement Modeling, DCF, M&A, Trading & Transaction Comps, and LBO modeling</strong>.</p>
+                <img src="starting_wsp.jpg" alt="Wall Street Prep Modeling Curriculum Progress" class="learning-img">
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-box">
+                    <div>
+                        <h4>Market Research Tools</h4>
+                        <p>Proficient in extracting crucial information from 10-Ks, Earnings Calls, and other firms' research, as well as utilizing Bloomberg, Excel, and PowerPoint for data sourcing and PIB construction.</p>
+                    </div>
+                </div>
+                <div class="skill-box">
+                    <div>
+                        <h4>Programming & Data</h4>
+                        <p>Highlighting a simple competency in Python and the ability to understand SQL to train ML models and make them work effectively.</p>
+                    </div>
+                    <a href="#" target="_blank" class="cert-link">View GitHub &rarr;</a>
+                </div>
+                <div class="skill-box">
+                    <div>
+                        <h4>Languages</h4>
+                        <p>Native proficiency in English. Fluent in Tamil and Malayalam.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leadership">
+            <h2>Leadership & Community Impact</h2>
+            <div class="timeline">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">VIT Debate Society</div>
+                        <span class="card-meta">Jan 2025 – Dec 2025 | Vellore, TN</span>
+                    </div>
+                    <div class="card-subtitle">Vice-President & Equity Officer</div>
+                    <ul class="bullet-list">
+                        <li><strong>Institutional Growth:</strong> Pioneered financial support and academic On-Duty attendance for 12+ competitions, resulting in record representation at national and international tournaments. Championed late-hour practice facilities directly translating to the highest achievements record since 2016.</li>
+                        <li><strong>Inclusivity:</strong> Served as Equity Officer promoting access to debate, achieving a ~30% increase in NCM participation.</li>
+                        <li><strong>Community Outreach:</strong> Partnered with the A Responsible Citizen Foundation to debate-train 60+ schools and 200+ students across rural West India, and conducted inclusive Indian National Schools Debate Squad selections.</li>
+                    </ul>
+                    <div class="gallery-grid">
+                        <img src="IMG_4125.jpg" alt="Vice President Internal - VIT Debate Society" class="square-window">
+                        <img src="IMG_4126.jpg" alt="Speaker Achievements Showcase" class="square-window">
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">ComFest 2025</div>
+                        <span class="card-meta">Oct 2025 | Vellore, TN</span>
+                    </div>
+                    <div class="card-subtitle">Student Manager - Ceremonies Team</div>
+                    <ul class="bullet-list">
+                        <li>Trained anchors and hosted 1,200+ participants and guest speakers with zero delays.</li>
+                        <li>Voluntarily cold-mailed 80+ schools, generating 120+ registrations to assist the Marketing Team.</li>
+                    </ul>
+                    <div class="gallery-grid" style="grid-template-columns: 1fr;">
+                        <img src="IMG_7976.jpg" alt="ComFest Student Manager Ceremonies Team Showcase" class="fit-window">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Education & Academic Background</h2>
+            <div class="edu-card">
+                <div class="edu-grid">
+                    <div>
+                        <h3 style="font-size: 1.3rem; font-weight:700; color:var(--text-main);">Vellore Institute of Technology</h3>
+                        <p style="color:var(--accent-secondary); font-weight:600; margin-top:0.2rem;">Bachelor of Commerce (Financial Technology) | Finance Major</p>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin-top:0.2rem;">Graduated 2026 &bull; Vellore, TN</p>
+                    </div>
+                    <div class="gpa-badge">
+                        GPA: 8.06 / 10.00 (3.3/4.0)
+                    </div>
+                </div>
+                <hr style="border:none; border-top:1px solid var(--border-color); margin:1.25rem 0;">
+                <p style="color:var(--text-muted); font-size:0.95rem;"><strong>Key Coursework:</strong> Financial Management, Financial Markets, Accounting, Financial Modelling, Audit & Assurance, Business Research Methods.</p>
+
+                <div style="margin-top:1.5rem;">
+                    <p style="color:var(--text-muted); font-size:0.9rem; font-weight:700; margin-bottom:0.7rem;">Honors & Awards</p>
+                    <div class="badge-group" style="margin-top:0;">
+                        <a href="Akhil_VIT_Spl_Achiever_certificate.pdf" target="_blank" class="cert-highlight">🏆 VIT Special Achiever Award (2025-26)</a>
+                        <a href="ideathon_certificate.jpg" target="_blank" class="cert-highlight">🥇 E-Summit '24 Ideathon Winner (E-Cell)</a>
+                    </div>
+                </div>
+                
+                <div class="research-showcase">
+                    <h4>📊 Academic Research Work</h4>
+                    <p style="font-size: 0.98rem; color: var(--text-main); font-weight: 700;">The Elasticity of Merchant Switching Costs in the Indian UPI Ecosystem</p>
+                    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.2rem;">Co-Authored with Shambhavi R | Supervised by Prof. Dr. Sathya N (Department of Commerce)</p>
+                    <ul class="bullet-list" style="margin-top: 0.75rem;">
+                        <li>Evaluated merchant switching barriers across 100 urban and semi-urban SME merchants analyzing PhonePe and Google Pay dominance.</li>
+                        <li>Empirically established a statistically significant positive correlation between switching cost perceptions and platform lock-in (p < 0.001, Pearson r = 0.674).</li>
+                    </ul>
+                    
+                    <iframe src="Elasticity_of_Merchant_Switching_Costs_UPI.pdf" class="ppt-preview-window" title="Research Presentation PPT Preview">
+                        <p>Your browser does not support inline PDF viewing. <a href="Elasticity_of_Merchant_Switching_Costs_UPI.pdf" target="_blank">Click here to download and view the presentation slides.</a></p>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="personal-interests">
+            <h2>Personal Interests</h2>
+            <div class="interests-grid">
+                
+                <div class="interest-card">
+                    <h3>Competitive Debate</h3>
+                    <img src="debate_photo_cupd25.JPEG" alt="Debate Photo" class="interest-img">
+                    <p>My ongoing journey in competitive university debate, in British and Asian Parliamentary formats.</p>
+                    <a href="https://substack.com/@akhiljoshua" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">Read More</a>
+                </div>
+
+                <div class="interest-card">
+                    <h3>Books & Reading</h3>
+                    <img src="prodigal_daughter.jpg" alt="Current Book Recommendation" class="interest-img">
+                    <p><strong>Currently Reading:</strong> The Prodigal Daughter</p>
+                    <p>Can power and love coexist in the world of the ambitious prodigal daughter of Abel (from Kane & Abel). This sequel explores the dynamic and costly relationship that most have with power.</p>
+                    <a href="https://amzn.in/d/0fQmOeHO" target="_blank" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">Link to book</a>
+                </div>
+
+                <div class="interest-card">
+                    <h3>Formula 1</h3>
+                    <img src="f1_interest.jpeg" alt="Formula 1 Racing" class="interest-img">
+                    <p><strong>Motorsport</strong></p>
+                    <p>Primarily following Formula 1, the pinnacle of motorsport engineering and strategy because no other sport requires you to track 20+ variables, the weather and tires at the same time. WEC is the madness that I enjoy when all these factors evolve over 6-24 hours. Supporting Scuderia Ferrari for their rich automotive history and indeed, coloring my first car red as a kid.</p>
+                    <a href="https://www.formula1.com/" target="_blank" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">Explore F1</a>
+                </div>
+
+                <div class="interest-card">
+                    <h3>Cars & Automotive History</h3>
+                    <img src="w124.png" alt="Favourite Car" class="interest-img">
+                    <p><strong>Mercedes Benz W124</strong></p>
+                    <p>Quintessentially German. Overengineered. Fascinatingly relevant in today's automotive landscape</p>
+                    <a href="https://youtu.be/2sCki6KlTf8?si=DAG99GKwYOWLEzJM" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">Watch More</a>
+                </div>
+
+                <div class="interest-card">
+                    <h3>Coffee & Brewing</h3>
+                    <img src="peruvian_coffee.jpg" alt="Favourite Coffee" class="interest-img">
+                    <p><strong>Peruvian Single Origin - Dark Roast</strong></p>
+                    <p>A chocolatey and nutty experience with a surprisingly earthy undertone</p>
+                    <a href="https://japanesecoffeeco.com/blogs/japanese-coffee-blog/everything-you-need-to-know-about-peru-coffee" class="btn btn-outline" style="border-color: var(--accent-primary); color: var(--accent-primary); margin-top: auto;">Learn More</a>
+                </div>
+
+                <div class="interest-card">
+                    <h3>Pets</h3>
+                    <img src="snoopy_buddy.jpeg" alt="Pets" class="interest-img">
+                    <p><strong>Pets and Animal Care</strong></p>
+                    <p>Ever since rescuing and adopting my first dog, I've had an affinity towards pets and animals in general!</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Contact Details</h4>
+                <ul>
+                    <li>Email: <a href="mailto:akhiljoshuad@outlook.com">akhiljoshuad@outlook.com</a></li>
+                    <li>Location: Nagercoil, TN [Open to Relocation]</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Professional Profiles</h4>
+                <ul>
+                    <li>LinkedIn: <a href="http://www.linkedin.com/in/akhiljoshua" target="_blank">linkedin.com/in/akhiljoshua</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>More About Me</h4>
+                <ul>
+                    <li><a href="#personal-interests">View Personal Interests</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Akhil Joshua Dennison. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ==========================================================
+         JAVASCRIPT: MENU DRAWER, SCROLLSPY & ANIMATION OBSERVERS
+         ========================================================== -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // 1. Navigation Drawer Logic
+            const menuToggle = document.getElementById('menuToggle');
+            const sideNav = document.getElementById('sideNav');
+            const navOverlay = document.getElementById('navOverlay');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            function toggleMenu() {
+                menuToggle.classList.toggle('active');
+                sideNav.classList.toggle('open');
+                navOverlay.classList.toggle('open');
+            }
+
+            menuToggle.addEventListener('click', toggleMenu);
+            navOverlay.addEventListener('click', toggleMenu);
+            
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if(sideNav.classList.contains('open')) toggleMenu();
+                });
+            });
+
+            // 2. ScrollSpy - Dynamic Active Links
+            const sections = document.querySelectorAll('section, header');
+            
+            const scrollSpyOptions = {
+                root: null,
+                rootMargin: "-20% 0px -70% 0px", 
+                threshold: 0
+            };
+
+            const scrollSpy = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const id = entry.target.getAttribute('id');
+                        const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
+                        if (activeLink) activeLink.classList.add('active');
+                    }
+                });
+            }, scrollSpyOptions);
+
+            sections.forEach(section => scrollSpy.observe(section));
+
+            // 3. Silky Smooth Fade-in Animations
+            const animationOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.12 
+            };
+
+            const animateObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Use requestAnimationFrame for VRR hardware timing
+                        requestAnimationFrame(() => {
+                            entry.target.classList.add('visible');
+                        });
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, animationOptions);
+
+            const headings = document.querySelectorAll('section h2');
+            const cards = document.querySelectorAll('.card, .cert-card-featured, .skill-box, .interest-card, .note-card, .learning-card, .edu-card, .recommend-item');
+            
+            headings.forEach(heading => {
+                heading.classList.add('fade-in');
+                animateObserver.observe(heading);
+            });
+
+            cards.forEach((card, index) => {
+                card.classList.add('fade-in');
+                // Staggered grid reveals
+                if (index % 3 === 1) card.classList.add('delay-1');
+                if (index % 3 === 2) card.classList.add('delay-2');
+                animateObserver.observe(card);
+            });
+
+            // Initial Hero load animation 
+            setTimeout(() => {
+                const introContent = document.querySelector('.intro-content');
+                const profileImg = document.querySelector('.profile-img');
+                if(introContent) { introContent.classList.add('fade-in', 'visible'); }
+                if(profileImg) { profileImg.classList.add('fade-in', 'visible'); }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
